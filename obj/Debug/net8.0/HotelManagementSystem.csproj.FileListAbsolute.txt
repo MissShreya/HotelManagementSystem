@@ -1,0 +1,14 @@
+D:\ConsoleApplication\HotelManagementSystem\bin\Debug\net8.0\HotelManagementSystem.exe
+D:\ConsoleApplication\HotelManagementSystem\bin\Debug\net8.0\HotelManagementSystem.deps.json
+D:\ConsoleApplication\HotelManagementSystem\bin\Debug\net8.0\HotelManagementSystem.runtimeconfig.json
+D:\ConsoleApplication\HotelManagementSystem\bin\Debug\net8.0\HotelManagementSystem.dll
+D:\ConsoleApplication\HotelManagementSystem\bin\Debug\net8.0\HotelManagementSystem.pdb
+D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\HotelManagementSystem.GeneratedMSBuildEditorConfig.editorconfig
+D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\HotelManagementSystem.AssemblyInfoInputs.cache
+D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\HotelManagementSystem.AssemblyInfo.cs
+D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\HotelManagementSystem.csproj.CoreCompileInputs.cache
+D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\HotelManagementSystem.dll
+D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\refint\HotelManagementSystem.dll
+D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\HotelManagementSystem.pdb
+D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\HotelManagementSystem.genruntimeconfig.cache
+D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\ref\HotelManagementSystem.dll
