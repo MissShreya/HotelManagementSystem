@@ -12,3 +12,4 @@ D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\refint\HotelManagem
 D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\HotelManagementSystem.pdb
 D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\HotelManagementSystem.genruntimeconfig.cache
 D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\ref\HotelManagementSystem.dll
+D:\ConsoleApplication\HotelManagementSystem\obj\Debug\net8.0\HotelManagementSystem.sourcelink.json
