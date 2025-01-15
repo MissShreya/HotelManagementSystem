@@ -15,6 +15,132 @@ using System.Web.Security;
 using System.Web.Mvc.Ajax;
 using System.Xml.Linq;
 using Microsoft.Ajax.Utilities;
+   // [HttpPost("AddRegDataUsingStoredProceudre")]
+   // public async Task<ActionResult> AddRegistrationDataUsingSroredProcedure(AddRegistrationData RegData)
+   // {
+   //     if (context.TblApiRegistrationMasters == null)
+   //     {
+   //         return BadRequest("Database context is not initialized.");
+   //     }
+
+   //     if (RegData == null)
+   //     {
+   //         return BadRequest("Registration data cannot be null.");
+   //     }
+
+   //     try
+   //     {
+   //         if (RegData.StrPassword != RegData.StrCntPassword)
+   //         {
+   //             return BadRequest("Passwords do not match.");
+   //         }
+   //         var parameters = new[]
+   //         {
+   //             new SqlParameter("@Mode",RegData.Mode),
+   //             new SqlParameter("@Id",""),
+   //             new SqlParameter("@RollNo", RegData.StrRollNo),
+   //             new SqlParameter("@Name", RegData.StrName),
+   //             new SqlParameter("@Email", RegData.StrEmail),
+   //             new SqlParameter("@Password", RegData.StrPassword),
+   //             new SqlParameter("@Course", RegData.StrCourse),
+   //             new SqlParameter("@Status", RegData.YnStatus)
+   //         };
+
+   //         await context.Database.ExecuteSqlRawAsync("EXEC sp_AddRegistrationDetail @Mode,@Id, @RollNo, @Name, @Email, @Password, @Course, @Status", parameters);
+
+   //         return Ok("Data added successfully.");
+   //     }
+   //     catch (Exception ex)
+   //     {
+   //         return StatusCode(500, $"Internal server error: {ex.Message}");
+   //     }
+   // }
+
+        #region #############UPDATE REG DATA ##########################
+        [Route("UpdateRedDataNormally")]
+        [HttpPut]
+        public async Task<ActionResult<TblApiRegistrationMaster>> UpdateRegDataNormally(UpdateRegDataDTO RegData)
+        {
+            if(context.TblApiRegistrationMasters == null) 
+            {
+                return BadRequest();
+            }
+            if (RegData == null)
+            {
+                return NotFound();
+            }
+
+            var existingRecord = await context.TblApiRegistrationMasters
+                                     .FirstOrDefaultAsync(r => r.IntPkStudentId == RegData.ID);
+
+            if (existingRecord == null)
+            {
+                return NotFound($"Record with ID {RegData.ID} not found.");
+            }
+
+
+
+            
+            existingRecord.StrRollNo = RegData.StrRollNo;
+            existingRecord.StrName = RegData.StrName;
+            existingRecord.StrEmail = RegData.StrEmail;
+            existingRecord.StrCourse = RegData.StrCourse;
+            existingRecord.YnStatus = RegData.YnStatus;
+
+
+
+            await context.SaveChangesAsync();
+            return Ok("Data Updated Successfully.");
+
+        }
+        #endregion ###############################################
+        [Route("GetRegDataUsingDTO"), HttpGet]
+        public async Task<ActionResult<IEnumerable<GetRegDataDTOcs>>> GetRegistrationListDTO([FromQuery] GetRegDataDTOcs RegData)
+        {
+            if (context.TblApiRegistrationMasters == null)
+            {
+                return BadRequest();
+            }
+
+            var result = RegData.Mode;
+
+            var dataFromDb = await context.TblApiRegistrationMasters
+                .FromSqlRaw("EXEC spAPI_GetStudentList @Mode = {0}", result)
+                .ToListAsync();
+
+            var data = dataFromDb
+                .Select(r => new GetRegDataDTOcs
+                {
+                    IntPkStudentId = r.IntPkStudentId,
+                    strRollNo = r.StrRollNo,
+                    strName = r.StrName,
+                    strCourse = r.StrCourse,
+                    ynStatus = r.YnStatus,
+                    dtCreatedOn = r.DtCreatedOn,
+                    strEmail = r.StrEmail,
+                    strPassword = r.StrPassword,
+                    strUserName = r.strUserName
+                })
+                .ToList();
+
+            if(data.Count==0)
+            {
+                return NotFound();
+            }
+
+            return Ok(data);
+        }
+
+        [Route("GetRegNormal"),HttpGet]
+        public async Task<ActionResult<IEnumerable<TblApiRegistrationMaster>>> GetRegistrationList()
+        {
+            if (context.TblApiRegistrationMasters == null)
+            {
+                return NotFound();
+            }
+            var data =await context.TblApiRegistrationMasters.ToListAsync();
+            return Ok(data);
+        }
 
 namespace SigmaIT
 {
